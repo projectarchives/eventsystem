@@ -18,7 +18,7 @@
     });
 
     Route::get('/', 'MyController@index');
-    //Route::get('login', 'MyController@index');
+    Route::get('login', 'MyController@index');
     Route::get('register', 'MyController@showRegister');
 //});
 

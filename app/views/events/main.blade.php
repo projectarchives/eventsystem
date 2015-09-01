@@ -31,8 +31,8 @@
                 </a>
               </li>
               <li>
-                <a href="../widgets.html">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
+                <a href="{{ URL::to('events')  }}">
+                    <i class="fa fa-th"></i> <span>Homepage</span>
                 </a>
                 </li>
                 <li>
