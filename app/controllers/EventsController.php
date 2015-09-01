@@ -120,7 +120,7 @@ class EventsController extends \BaseController {
 	public function destroy($id)
 	{
 		$delete = Events::where('event_id', '=', $id)->delete();
-        return $delete;
+        return Redirect::to('events')->with('message', 'Deleted Successfully');
 	}
 
 
