@@ -11,15 +11,16 @@
 |
 */
 
-Route::group(['before' => 'guest'], function (){
+//Route::group(['before' => 'guest'], function (){
     Route::group(['before' => 'csrf'], function(){
-       Route::post('login', 'MyController@postLogin');
+        Route::post('login', 'MyController@postLogin');
+        Route::post('register', 'MyController@postRegister');
     });
 
     Route::get('/', 'MyController@index');
-    Route::get('login', 'MyController@index');
-    Route::get('register', 'MyController@store');
-});
+    //Route::get('login', 'MyController@index');
+    Route::get('register', 'MyController@showRegister');
+//});
 
 Route::group(['before' => 'auth'], function (){
     Route::group(['before' => 'csrf', 'prefix' => 'events'], function () {

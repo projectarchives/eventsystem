@@ -4,44 +4,37 @@
 <article>
 <h1>Register To Event Manager</h1>
 {{ Form::open(['url' => 'register']) }}
+    {{ Form::token() }}
 	<ul>
         <li>
-        	<label for="name">Your Name:</label>
-            <input type="text" size="40" id="name" />
+            {{ Form::label('Username', 'Username:') }}
+            {{ Form::text('username', null, ['id' => 'username', 'size' => '40'], Input::old('username')) }}
         </li>
+        {{ $errors->first('username') }}
         <li>
-        	<label for="email">Your Email:</label>
-            <input type="email" size="40" id="email" />
+            {{ Form::label('Email', 'Email:') }}
+            {{ Form::text('email', null, ['id' => 'email', 'size' => '40'], Input::old('email')) }}
         </li>
+        {{ $errors->first('email') }}
         <li>
-            <label for="car">What's my options:</label>
-            <select id="car">
-                <option>Volvo</option>
-                <option>Saab</option>
-                <option>Mercedes</option>
-                <option>Audi</option>
-                <option>Other&hellip;</option>
-            </select>
+            {{ Form::label('Name', 'Full Name:') }}
+            {{ Form::text('name', null, ['id' => 'name', 'size' => '40'], Input::old('name')) }}
         </li>
+        {{ $errors->first('name') }}
         <li>
-            <label><input type="radio" name="radio" /> Pick one</label>
-            <label><input type="radio" name="radio" /> And stick with it</label>
+            {{ Form::label('Password', 'Password:') }}
+            {{ Form::password('password', ['id' => 'password', 'size' => '20']) }}
         </li>
+        {{ $errors->first('password') }}
         <li>
-			<label><input type="checkbox" /> Can haz tickbox?</label>
+            {{ Form::label('PasswordAgain', 'Password Again:') }}
+            {{ Form::password('password_confirmation', ['id' => 'password_confirmation', 'size' => '20']) }}
         </li>
-        <li>
-            <label>Upload a file:</label>
-            <input type="file" />
-        </li>
-        <li>
-        	<label for="message">Message:</label>
-            <textarea cols="50" rows="5" id="message"></textarea>
-		</li>
+        {{ $errors->first('password_confirmation') }}
+
 	</ul>
     <p>
-        <button type="submit" class="action">Call to action</button>
-        <button type="reset" class="right">Reset</button>
+        {{ Form::button('Register',['type' => 'submit', 'class' => 'action']) }}
     </p>
 </form>
 </article>

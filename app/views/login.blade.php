@@ -4,6 +4,7 @@
 <article>
 <h1>Welcome To Event Manager</h1>
 {{ Form::open(['url' => 'login']) }}
+    {{ Form::token() }}
 	<ul>
         <li>
             {{ Form::label('Username', 'Username:') }}
@@ -17,8 +18,8 @@
         {{ $errors->first('password') }}
 	</ul>
     <p>
-        {{ Form::button('Login',['type' => 'submit', 'class' => 'action']) }}
-        {{ Form::button('Register',['type' => 'submit', 'class' => 'right']) }}
+        {{ Form::button('Login',['type' => 'submit', 'class' => 'action', 'name' => 'Login', 'value' => 'Login']) }}
+        {{ Form::button('Register',['type' => 'submit', 'class' => 'right', 'name' => 'Register', 'value' => 'Register']) }}
     </p>
 </form>
 </article>
