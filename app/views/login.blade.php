@@ -4,7 +4,6 @@
 <article>
 <h1>Welcome To Event Manager</h1>
 {{ Form::open(['url' => 'login']) }}
-    {{ Form::token() }}
 	<ul>
         <li>
             {{ Form::label('Username', 'Username:') }}

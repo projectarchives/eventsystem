@@ -9,7 +9,7 @@ class EventsController extends \BaseController {
 	 */
 	public function index()
 	{
-        $events = Events::all();
+        $events = Events::where('user_id', '=', Auth::user()->id )->get();
 		return View::make('events.main')->with('data', $events);
 	}
 
@@ -21,14 +21,12 @@ class EventsController extends \BaseController {
 	 */
 	public function create($id)
 	{
-		if ($id == 'add')
-        {
-            return View::make('events.add');
+        if($id == 'add') {
+           $data = $id;
+        } else {
+            $data = Events::where('event_id', '=', $id)->get()->first();
         }
-        else
-        {
-            return "Nothing Found";
-        }
+        return View::make('events.add')->with('data', $data);
 	}
 
 
@@ -48,7 +46,7 @@ class EventsController extends \BaseController {
                 'event_name' => $event_name,
                 'event_date' => $event_date,
                 'event_detail' => $event_details,
-                'user_id' => 1
+                'user_id' => Auth::user()->id
             ]);
 
             if ($event) {
@@ -94,7 +92,22 @@ class EventsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		/*$data = Events::where('event_id', '=', $id);
+        return $data;*/
+        $event_id = $id;
+        $event_updated_name = Input::get('name');
+        $event_updated_detail = Input::get('details');
+        $event_updated_date = Input::get('event_date');
+        $updated_data = Events::where('event_id', '=', $event_id)
+            ->update(['event_name'=> $event_updated_name,
+                'event_detail' => $event_updated_detail,
+                'event_date' => $event_updated_date
+            ]);
+        if($updated_data) {
+            return Redirect::to('events')->with('data', 'Events Updated Successfully');
+        } else {
+            return Redirect::to('events/'.$event_id)->with('error', 'Couldnot Updated Events');
+        }
 	}
 
 
@@ -106,7 +119,8 @@ class EventsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$delete = Events::where('event_id', '=', $id)->delete();
+        return $delete;
 	}
 
 

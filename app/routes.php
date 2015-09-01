@@ -23,10 +23,15 @@
 //});
 
 Route::group(['before' => 'auth'], function (){
-    Route::group(['before' => 'csrf', 'prefix' => 'events'], function () {
-        Route::get('/', ['as' => 'main', 'uses' => 'EventsController@index']);
-        Route::get('/{get}', ['as' => 'add', 'uses' => 'EventsController@create']);
-        Route::post('/store', 'EventsController@store');
+    Route::group(['before' => 'csrf'], function () {
+        Route::group(['prefix' => 'events'], function () {
+            Route::get('/', ['as' => 'main', 'uses' => 'EventsController@index']);
+            Route::get('/{get}', ['as' => 'add', 'uses' => 'EventsController@create']);
+            Route::post('update/{get}','EventsController@update');
+            Route::get('delete/{get}', 'EventsController@destroy');
+            Route::post('/store', 'EventsController@store');
+        });
+        Route::get('signout', 'MyController@logout');
     });
 });
 

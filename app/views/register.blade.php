@@ -4,7 +4,6 @@
 <article>
 <h1>Register To Event Manager</h1>
 {{ Form::open(['url' => 'register']) }}
-    {{ Form::token() }}
 	<ul>
         <li>
             {{ Form::label('Username', 'Username:') }}
@@ -34,7 +33,7 @@
 
 	</ul>
     <p>
-        {{ Form::button('Register',['type' => 'submit', 'class' => 'action']) }}
+        {{ Form::Registern('Login',['type' => 'submit', 'class' => 'action']) }}
     </p>
 </form>
 </article>

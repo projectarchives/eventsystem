@@ -163,4 +163,9 @@ class MyController extends \BaseController {
             return Redirect::to('register')->withErrors($validator)->withInput(Input::except('password'));
         }
     }
+
+    public function logout (){
+        Auth::logout();
+        return Redirect::to('/');
+    }
 }

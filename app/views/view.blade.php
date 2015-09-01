@@ -2,12 +2,14 @@
 
 if (\Fdw\Core\Libraries\Helpage\Packager::enabled('cart­ebay')) {
     $ebay_categories = \Fdw\CartEbay\Models\EbayCategory::getCategoryTree($parent);
-    if ($modal->id() == true) {
+    if ($modal->id()) {
         $primary_category = $model­>ebayCategories()
             ->where('ebay_category_type', 'primary')
+            ->get()
             ->first();
         $secondary_category = $model­>ebayCategories()
             ->where('ebay_category_type', 'secondary')
+            ->get()
             ->first();
     }
 }

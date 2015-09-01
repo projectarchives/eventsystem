@@ -9,7 +9,7 @@ class Events extends Model {
 
     protected $fillable = ['event_name', 'event_date', 'event_detail', 'user_id'];
 
-    protected $hidden = array('created_at', 'updated_at', 'event_id', 'user_id');
+    protected $hidden = array('created_at', 'updated_at', 'user_id');
 
     //protected $dates = ['created_at', 'updated_at', 'event_date'];
 
