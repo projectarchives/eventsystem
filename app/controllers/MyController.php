@@ -9,7 +9,11 @@ class MyController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+        if (Auth::check()) {
+            return Redirect::to('events')->with('success', 'You are already logged in');
+        } else {
+            return View::make('login');
+        }
 	}
 
 
@@ -20,7 +24,7 @@ class MyController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return 'login';
 	}
 
 
@@ -82,5 +86,27 @@ class MyController extends \BaseController {
 		//
 	}
 
+    public function postLogin()
+    {
+        $userInfo = [
+            'username' => Input::get('username'),
+            'password' => Input::get('password')
+        ];
 
+        $rules = [
+            'username' => 'Required',
+            'password' => 'Required'
+        ];
+
+        $validator = Validator::make($userInfo, $rules);
+
+        if ($validator->passes()) {
+            if (Auth::attempt($userInfo)) {
+                return Redirect::to('')->with('success', 'You have logged in successfully');
+            } else {
+                return Redirect::to('login')->withErrors(['password' => 'Invalid Username or Password! Please try again.'])->withInput(Input::except('password'));
+            }
+        }
+        return Redirect::to('login')->withErrors($validator)->withInput(Input::except('password'));
+    }
 }

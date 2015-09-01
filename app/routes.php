@@ -11,7 +11,21 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::group(['before' => 'guest'], function (){
+    Route::group(['before' => 'csrf'], function(){
+       Route::post('login', 'MyController@postLogin');
+    });
+
+    Route::get('/', 'MyController@index');
+    Route::get('login', 'MyController@index');
+    Route::get('register', 'MyController@store');
 });
+
+Route::group(['before' => 'auth'], function (){
+    Route::group(['before' => 'csrf', 'prefix' => 'events'], function () {
+        Route::get('/', ['as' => 'main', 'uses' => 'EventsController@index']);
+        Route::get('/{get}', ['as' => 'add', 'uses' => 'EventsController@create']);
+        Route::post('/store', 'EventsController@store');
+    });
+});
+
