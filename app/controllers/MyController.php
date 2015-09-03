@@ -1,90 +1,89 @@
 <?php
 
-class MyController extends \BaseController {
+class MyController extends \BaseController
+{
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
         if (Auth::check()) {
             return Redirect::to('events')->with('success', 'You are already logged in');
         } else {
             return View::make('login');
         }
-	}
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+
+    }
 
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        //
+    }
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 
     public function postLogin()
     {
@@ -105,16 +104,21 @@ class MyController extends \BaseController {
                 if (Auth::attempt($userInfo)) {
                     return Redirect::to('events')->with('success', 'You have logged in successfully');
                 } else {
-                    return Redirect::to('login')->withErrors(['password' => 'Invalid Username or Password! Please try again.'])->withInput(Input::except('password'));
+                    return Redirect::to('login')
+                        ->withErrors(['password' => 'Invalid Username or Password! Please try again.'])
+                        ->withInput(Input::except('password'));
                 }
             }
             return Redirect::to('login')->withErrors($validator)->withInput(Input::except('password'));
-        } else if (Input::has('Register')) {
-            return Redirect::to('register');
+        } else {
+            if (Input::has('Register')) {
+                return Redirect::to('register');
+            }
         }
     }
 
-    public function showRegister (){
+    public function showRegister()
+    {
         if (Auth::check()) {
             return Redirect::to('events')->with('success', 'You are already logged in. No need to Register');
         } else {
@@ -164,7 +168,8 @@ class MyController extends \BaseController {
         }
     }
 
-    public function logout (){
+    public function logout()
+    {
         Auth::logout();
         return Redirect::to('/');
     }

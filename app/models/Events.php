@@ -1,9 +1,9 @@
 <?php
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Events extends Model {
+class Events extends Model
+{
 
     protected $table = 'event';
 
@@ -16,5 +16,5 @@ class Events extends Model {
     /*public function setEventDateAttribute($date){
         this->attributes['event_date'] = Carbon::createFromFormat('Y-m-d', $date);
     }*/
-
 }
+

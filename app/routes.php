@@ -12,26 +12,25 @@
 */
 
 //Route::group(['before' => 'guest'], function (){
-    Route::group(['before' => 'csrf'], function(){
-        Route::post('login', 'MyController@postLogin');
-        Route::post('register', 'MyController@postRegister');
-    });
+Route::group(['before' => 'csrf'], function () {
+    Route::post('login', 'MyController@postLogin');
+    Route::post('register', 'MyController@postRegister');
+});
 
-    Route::get('/', 'MyController@index');
-    Route::get('login', 'MyController@index');
-    Route::get('register', 'MyController@showRegister');
+Route::get('/', 'MyController@index');
+Route::get('login', 'MyController@index');
+Route::get('register', 'MyController@showRegister');
 //});
 
-Route::group(['before' => 'auth'], function (){
+Route::group(['before' => 'auth'], function () {
     Route::group(['before' => 'csrf'], function () {
         Route::group(['prefix' => 'events'], function () {
             Route::get('/', ['as' => 'main', 'uses' => 'EventsController@index']);
             Route::get('/{get}', ['as' => 'add', 'uses' => 'EventsController@create']);
-            Route::post('update/{get}','EventsController@update');
+            Route::post('update/{get}', 'EventsController@update');
             Route::get('delete/{get}', 'EventsController@destroy');
             Route::post('/store', 'EventsController@store');
         });
         Route::get('signout', 'MyController@logout');
     });
 });
-
